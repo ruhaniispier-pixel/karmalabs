@@ -796,3 +796,182 @@ footer {
   .process-grid { grid-template-columns: 1fr; }
   .contact-form { padding: 22px; }
 }
+
+
+/* =========================================================
+   OVERLAP / RESPONSIVE SAFETY FIXES
+   ========================================================= */
+
+.hero-grid,
+.section-head,
+.work-grid,
+.contact-grid,
+.footer-grid {
+  min-width: 0;
+}
+
+.hero-grid > *,
+.section-head > *,
+.work-grid > *,
+.contact-grid > *,
+.footer-grid > * {
+  min-width: 0;
+}
+
+.hero-grid {
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
+}
+
+.hero h1 {
+  font-size: clamp(50px, 5.7vw, 82px);
+  overflow-wrap: anywhere;
+}
+
+/* Keep the campaign cards separate instead of overlapping content */
+.hero-lab {
+  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-content: center;
+  padding: 20px 0;
+}
+
+.lab-window {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: 470px;
+  justify-self: center;
+  transform: rotate(.6deg);
+}
+
+.mini-card {
+  position: static;
+  width: 100%;
+  min-width: 0;
+  transform: none !important;
+}
+
+.card-a,
+.card-b {
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+}
+
+.section-head h2,
+.faq-copy h2,
+.contact-copy h2,
+.overlay h3,
+.service h3 {
+  overflow-wrap: anywhere;
+}
+
+.work-card .overlay {
+  max-width: calc(100% - 56px);
+}
+
+.work-card .overlay h3 {
+  font-size: clamp(24px, 2.6vw, 42px);
+}
+
+.section-head {
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr);
+}
+
+/* Move to hamburger navigation earlier so the header never collides */
+@media (max-width: 1000px) {
+  .desktop-cta {
+    display: none;
+  }
+
+  .menu-btn {
+    display: flex;
+  }
+
+  nav {
+    position: absolute;
+    top: 78px;
+    left: 14px;
+    right: 14px;
+    padding: 16px;
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+
+  nav.open {
+    display: flex;
+  }
+
+  nav a {
+    padding: 12px 8px;
+    border-bottom: 1px solid rgba(17,19,21,.12);
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .hero-lab {
+    width: min(100%, 680px);
+    margin: 0 auto;
+  }
+
+  .section-head {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 780px) {
+  .hero-lab {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-window,
+  .mini-card {
+    grid-column: 1;
+  }
+
+  .work-card .overlay {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    max-width: none;
+  }
+
+  .ribbon {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero h1 {
+    font-size: 43px;
+    letter-spacing: -1.5px;
+  }
+
+  .lab-window {
+    padding: 18px;
+  }
+
+  .metrics {
+    gap: 8px;
+  }
+
+  .metrics strong {
+    font-size: 22px;
+  }
+
+  .answer-box h3 {
+    font-size: 15px;
+  }
+}
