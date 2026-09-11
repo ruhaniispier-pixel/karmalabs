@@ -1,18 +1,37 @@
-const menu = document.getElementById("menu");
-const nav = document.getElementById("nav");
-const form = document.getElementById("contactForm");
-const toast = document.getElementById("toast");
+const menuBtn = document.getElementById("menuBtn");
+const navMenu = document.getElementById("navMenu");
 
-menu.addEventListener("click", () => {
-  nav.classList.toggle("open");
-});
+if (menuBtn && navMenu) {
+  menuBtn.addEventListener("click", () => {
+    navMenu.classList.toggle("open");
+  });
 
-nav.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => nav.classList.remove("open"));
-});
+  navMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => navMenu.classList.remove("open"));
+  });
+}
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 3500);
-});
+const revealItems = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealItems.forEach(item => observer.observe(item));
+} else {
+  revealItems.forEach(item => item.classList.add("visible"));
+}
+
+const form = document.getElementById("leadForm");
+if (form) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("Form design is ready. Connect Formspree or your backend before launch.");
+  });
+}
